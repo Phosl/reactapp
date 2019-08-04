@@ -13,30 +13,62 @@ class App extends Component {
 	}
 	
 	//methods 
-	switchNameHandler = () => {
+	switchNameHandler = (newName) => {
 		console.log('Was Clicked!!!')
 		// DON'T DO THIS: this.state.persons[0].name = 'Maximilian'; USE:
 		this.setState({
 		persons: [
-			{ name: 'Maximilian', age: 28},
+			{ name: newName, age: 28},
 			{ name: 'Mia', age: 12},
 			{ name: 'Rod', age: 99}
 		]
 		})
 		
 	}
+	nameChangeHandler = (event) => {
+		this.setState({
+		persons: [
+			{ name: "Max", age: 28},
+			{ name: event.target.value, age: 12},
+			{ name: 'Rod', age: 99}
+		]
+		})
+
+		
+	}
+
 
 	render() {
 		return (			
 			// good to close in just one root element
+			// - BIND -> LEGARE
 		    <div className="App"> 
 				<h1>Hi, i’m a React</h1>
 				
-				<button onClick={this.switchNameHandler} >Switch Name</button>
+	{
+/*
+				DONT USE COULD BE INEFFICIENT
+				<button onClick={() => this.switchNameHandler('MAXIMO')} >Switch Name</button>
+*/
+	}
+				<button onClick={this.switchNameHandler.bind(this,'Maximilian')} >Switch Name</button>
 				
-				<Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-				<Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-				<Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+				<Person 
+				name={this.state.persons[0].name} 
+				age={this.state.persons[0].age} 
+				/>
+				
+				<Person 
+				name={this.state.persons[1].name} 
+				age={this.state.persons[1].age} 
+				myclick={this.switchNameHandler.bind(this,'MAX!')}
+				mychanged={this.nameChangeHandler}
+				/>
+				
+				<Person 
+				name={this.state.persons[2].name} 
+				age={this.state.persons[2].age} 
+				/>
 				
 				
 		    </div>
