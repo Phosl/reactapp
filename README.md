@@ -1,3 +1,10 @@
+
+## React Course
+
+This project was created as playground of React JS
+
+----------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
