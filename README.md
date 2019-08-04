@@ -1,7 +1,7 @@
 
 ## React Course
 
-This project was created as playground of React JS
+This project was created as playground for React JS
 
 ----------------------------------------------
 
