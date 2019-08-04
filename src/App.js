@@ -39,6 +39,16 @@ class App extends Component {
 
 
 	render() {
+
+	const style={
+		backgroundColor: 'green',
+		font:'inherit',
+		padding:'8px 20px',
+		cursor:'pointer',
+		color:'white',
+		border: '0'
+	};
+
 		return (			
 			// good to close in just one root element
 			// - BIND -> LEGARE
@@ -51,7 +61,7 @@ class App extends Component {
 				<button onClick={() => this.switchNameHandler('MAXIMO')} >Switch Name</button>
 */
 	}
-				<button onClick={this.switchNameHandler.bind(this,'Maximilian')} >Switch Name</button>
+				<button style={style} onClick={this.switchNameHandler.bind(this,'Maximilian')} >Switch Name</button>
 				
 				<Person 
 				name={this.state.persons[0].name} 

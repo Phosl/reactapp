@@ -3,4 +3,13 @@ body {
 	padding: 0;
 	font-family: sans-serif;
 	text-align: center;
+	background: #f2f2f2;
+
+}
+h1 {
+	margin: 20px;
+}
+
+.App {
+	margin: 0px;
 }
