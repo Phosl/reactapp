@@ -46,12 +46,26 @@ class App extends Component {
 	}
 
 	deletePersonHandler = (personIndex) => {
+		// A BAD Way
 		// fetch all persons
-		const persons = this.state.persons;
+		//const persons = this.state.persons;
 		// create a new version of array Splice rimuove un elemento dall'array
-		persons.splice(personIndex,1); 
+		//persons.splice(personIndex,1); 
 		// setto lo stato con il nuovo array privo di un elemento
-		this.setState({persons: persons})
+		//this.setState({persons: persons})
+		// with this we mutate the original state
+		// A GOOD Way
+		// create a copy of the array
+		// we can use a Slice() 
+		// Slice =>  A new array containing the extracted elements.
+		// with out argoments its simply return all the array 
+		//const persons = this.state.persons.slice();
+		// But we can do it with a jsx using SPREAD operator
+		const persons = [...this.state.persons];
+		persons.splice(personIndex,1); 
+		this.setState({persons:persons})
+		// qundi creare una copia, cambiarla ed aggiornare lo stato con il nuovo stato
+
 	}
 	render() {
 
