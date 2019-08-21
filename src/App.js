@@ -3,9 +3,6 @@ import './App.css';
 import Person from './Person/Person'
 
 
-import UserInput from './UserInput/UserInput'
-import UserOutput from './UserOutput/UserOutput'
-
 
 class App extends Component {
 	
@@ -15,7 +12,7 @@ class App extends Component {
 			{ name: 'Mia', age: 12},
 			{ name: 'Rod', age: 27}
 		],
-		username : 'SuperFil'
+		showPersons: false
 	}
 	
 	//methods 
@@ -42,12 +39,20 @@ class App extends Component {
 
 		
 	}
-
-
-	UserNameInputHandler = (event) => {
-		this.setState({username:event.target.value})
+	
+	togglePersonsHandler = () => {
+		const doesShow = this.state.showPersons;
+		this.setState({showPersons: !doesShow});
 	}
 
+	deletePersonHandler = (personIndex) => {
+		// fetch all persons
+		const persons = this.state.persons;
+		// create a new version of array Splice rimuove un elemento dall'array
+		persons.splice(personIndex,1); 
+		// setto lo stato con il nuovo array privo di un elemento
+		this.setState({persons: persons})
+	}
 	render() {
 
 		const buttonStyle={
@@ -59,47 +64,33 @@ class App extends Component {
 			border: '0'
 		};
 
+		
+		let persons = null;
+		if(this.state.showPersons) {
+			persons = (
+				<div>
+				{this.state.persons.map((person, index) => {
+					return <Person 
+						myclick={() => this.deletePersonHandler(index)}
+						name={person.name} 
+						age={person.age} 					
+					/>
+				})}
+				</div> 
+			);
+		}
+
 		return (			
 			// good to close in just one root element
 			// - BIND -> LEGARE
 		    <div className="App"> 
 				<h1>Hi, i’m a React</h1>
-				{/*
-				DONT USE COULD BE INEFFICIENT
-				<button onClick={() => this.switchNameHandler('MAXIMO')} >Switch Name</button>
-				*/}
-				<section>
-					<button style={buttonStyle} onClick={this.switchNameHandler.bind(this,'Maximilian')} >Switch Name</button>
-					<Person 
-					name={this.state.persons[0].name} 
-					age={this.state.persons[0].age} 
-					/>
-					<Person 
-					name={this.state.persons[1].name} 
-					age={this.state.persons[1].age} 
-					myclick={this.switchNameHandler.bind(this,'MAX!')}
-					mychanged={this.nameChangeHandler}
-					/>
-					<Person 
-					name={this.state.persons[2].name} 
-					age={this.state.persons[2].age} 
-					/>
-				</section>
-				
-				<section>
-					<UserInput 
-						changed = {this.UserNameInputHandler} 
-						currentName = {this.state.username}
-					/>
-					<UserOutput username={this.state.username}  />
-					<UserOutput username="Max"/>
-				</section>
-		    
+				<button style={buttonStyle} onClick={this.togglePersonsHandler} >Toggle Persons</button>
+				{persons}
+
 		    
 		    </div>
 		);
-		// React.createElement('element',{className:'myclass'}, 'myText')
-		// 	return React.createElement('div',{className:'App'}, React.createElement('h1', {className:'title'},'Hi, I’m React App!!!'))
 	}
 }
 
