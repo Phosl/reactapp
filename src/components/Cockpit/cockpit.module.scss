@@ -1,0 +1,25 @@
+.Cockpit {
+    button {
+        border: 1px solid green;
+        padding: 16px;
+        color: white;
+        background-color: green;
+        font-weight: bold;
+        font-size: 12px;
+        cursor: pointer;
+        transition: 0.2s all;
+
+        &:hover {
+            background-color: lightgreen;
+            color: black;
+        }
+        &.red {
+            background-color: red;
+            color:black;
+            &:hover {
+            background-color: orange;
+            
+            }
+        }
+    }	
+}
