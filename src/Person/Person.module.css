@@ -7,3 +7,9 @@
 	border-radius: 3px;
 	background-color: white;
 }
+
+@media (min-width: 700px) {
+	.Person {
+		max-width: 500px;
+	}
+}
