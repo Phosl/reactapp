@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Person from './Person/Person';
 
 
@@ -104,20 +104,20 @@ class App extends Component {
 			}
 		}
 
-		let classes = [];
+		let assignedClasses = [];
 		if (this.state.persons.length <= 2) {
-			classes.push('red'); // class = "red"
+			assignedClasses.push(classes.red); // class = "red"
 		}
 		if (this.state.persons.length <= 1) {
-			classes.push('bold'); // class = ['red','bold']
+			assignedClasses.push(classes.bold); // class = ['red','bold']
 		}
 
 		return (			
 			// good to close in just one root element
 			// - BIND -> LEGARE
-			<div className="App"> 
+			<div className={classes.App}> 
 				<h1>Hi, i’m a React</h1>
-				<p className={classes.join(' ')}> Hello </p>
+				<p className={assignedClasses.join(' ')}> Hello </p>
 
 				<button style={buttonStyle} onClick={this.togglePersonsHandler} >Toggle Persons</button>
 
