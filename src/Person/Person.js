@@ -5,12 +5,6 @@ import classes from './Person.module.css';
 
 // Function component - name lower case
 const person = (props) => {
-
-	const rnd = Math.random();
-	if(rnd > 0.7) {
-		throw new Error('Cazzo!')
-	}
-
 	return (
 	<div className={classes.Person} >
 		<p onClick={props.click} >I’m {props.name} and I am {props.age} years old </p>
