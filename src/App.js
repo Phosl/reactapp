@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
 
 
 
@@ -76,7 +76,10 @@ class App extends Component {
 			padding:'8px 20px',
 			cursor:'pointer',
 			color:'white',
-			border: '0'
+			border: '0',
+			':hover': {
+				backgroundColor: 'lightgreen',
+			}
 		};
 
 		let persons = null;
@@ -94,13 +97,28 @@ class App extends Component {
 				})}
 				</div> 
 			);
+			buttonStyle.backgroundColor = 'red';
+			buttonStyle[':hover'] = {
+				backgroundColor: 'orange',
+				color:'black'
+			}
+		}
+
+		let classes = [];
+		if (this.state.persons.length <= 2) {
+			classes.push('red'); // class = "red"
+		}
+		if (this.state.persons.length <= 1) {
+			classes.push('bold'); // class = ['red','bold']
 		}
 
 		return (			
 			// good to close in just one root element
 			// - BIND -> LEGARE
-		    <div className="App"> 
+			<div className="App"> 
 				<h1>Hi, i’m a React</h1>
+				<p className={classes.join(' ')}> Hello </p>
+
 				<button style={buttonStyle} onClick={this.togglePersonsHandler} >Toggle Persons</button>
 
 				{persons}
