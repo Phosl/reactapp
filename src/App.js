@@ -5,48 +5,38 @@ import Person from './Person/Person'
 
 
 class App extends Component {
-	
+
 	state = {
 		persons: [
-			{ name: 'Max', age: 28},
-			{ name: 'Mia', age: 12},
-			{ name: 'Rod', age: 27}
+			{ id:'aza', name: 'Max', age: 28},
+			{ id:'axa', name: 'Mia', age: 12},
+			{ id:'aca', name: 'Rod', age: 27}
 		],
 		showPersons: false
 	}
-	
-	//methods 
-	switchNameHandler = (newName) => {
-		console.log('Was Clicked!!!')
-		// DON'T DO THIS: this.state.persons[0].name = 'Maximilian'; USE -->
-		this.setState({
-		persons: [
-			{ name: newName, age: 28},
-			{ name: 'Mia', age: 12},
-			{ name: 'Rod', age: 99}
-		]
-		})
-		
-	}
-	nameChangeHandler = (event) => {
-		this.setState({
-		persons: [
-			{ name: "Max", age: 28},
-			{ name: event.target.value, age: 12},
-			{ name: 'Rod', age: 99}
-		]
-		})
+	nameChangedHandler = (event, id) => { 
+		//findIndex find element in the array but get the index of it 
+		// scorre in tutti gli elementi dell'array ( come MAP )
+		const personIndex = this.state.persons.findIndex(p => {
+			return p.id === id;
+		  });
+		const person = {
+			...this.state.persons[personIndex] // prendo persona singola
+		}
 
+		person.name = event.target.value; // aggiorno con il valore dell'evento
+		const persons =[...this.state.persons]; //copia del vecchio elemento
+
+		persons[personIndex] = person; // aggiorno la copia del vecchio elemento con il nuovo 
+		// settare stato con il nuovo elemento
+		this.setState({ persons:persons })
 		
-	}
-	
-	togglePersonsHandler = () => {
-		const doesShow = this.state.showPersons;
-		this.setState({showPersons: !doesShow});
-	}
+	} 
+
 
 	deletePersonHandler = (personIndex) => {
 		// A BAD Way
+		//-----------
 		// fetch all persons
 		//const persons = this.state.persons;
 		// create a new version of array Splice rimuove un elemento dall'array
@@ -54,19 +44,30 @@ class App extends Component {
 		// setto lo stato con il nuovo array privo di un elemento
 		//this.setState({persons: persons})
 		// with this we mutate the original state
+	
 		// A GOOD Way
+		//-----------
 		// create a copy of the array
 		// we can use a Slice() 
 		// Slice =>  A new array containing the extracted elements.
 		// with out argoments its simply return all the array 
 		//const persons = this.state.persons.slice();
-		// But we can do it with a jsx using SPREAD operator
+	
+		//BUT
+		//-----------
+		// we can do it also with a jsx using SPREAD operator
 		const persons = [...this.state.persons];
 		persons.splice(personIndex,1); 
 		this.setState({persons:persons})
 		// qundi creare una copia, cambiarla ed aggiornare lo stato con il nuovo stato
 
 	}
+	togglePersonsHandler = () => {
+		const doesShow = this.state.showPersons;
+		this.setState({showPersons: !doesShow});
+	}
+
+
 	render() {
 
 		const buttonStyle={
@@ -78,16 +79,17 @@ class App extends Component {
 			border: '0'
 		};
 
-		
 		let persons = null;
 		if(this.state.showPersons) {
 			persons = (
 				<div>
 				{this.state.persons.map((person, index) => {
 					return <Person 
-						myclick={() => this.deletePersonHandler(index)}
+						click={() => this.deletePersonHandler(index)}
+						key={person.id}
 						name={person.name} 
-						age={person.age} 					
+						age={person.age} 
+						changed= {(event) => this.nameChangedHandler(event, person.id)} 					
 					/>
 				})}
 				</div> 
@@ -100,6 +102,7 @@ class App extends Component {
 		    <div className="App"> 
 				<h1>Hi, i’m a React</h1>
 				<button style={buttonStyle} onClick={this.togglePersonsHandler} >Toggle Persons</button>
+
 				{persons}
 
 		    
@@ -109,6 +112,7 @@ class App extends Component {
 }
 
 export default App;
+
 
 
 // https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/12982500#overview
