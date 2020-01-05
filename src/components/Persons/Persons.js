@@ -2,34 +2,36 @@ import React, {Component} from 'react'
 import Person from './Person/Person'
 
 class Persons extends Component {
+  /*  we comment this becouse its initial state is undefined. */
+  //   static getDerivedStateFromProps(props, state) {
+  //     console.log('[Persons.js] getDerivedStateFromProps ')
+  //     return state
+  //   }
 
-/*  we comment this becouse its initial state is undefined. */
-//   static getDerivedStateFromProps(props, state) {
-//     console.log('[Persons.js] getDerivedStateFromProps ')
-//     return state
-//   }
-
-//  componentWillReceiveProps(props) {
-//     console.log('[Persons.js] componentWillReceiveProps ',props);
-//  }
+  //  componentWillReceiveProps(props) {
+  //     console.log('[Persons.js] componentWillReceiveProps ',props);
+  //  }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[Persons.js] shouldComponentUpdate ')
-    return true; 
+    return true
   }
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate ')
-    return {message: 'Snapshot!'};
+    return {message: 'Snapshot!'}
   }
+  // Removed
+  //   componentWillUpdate() {
+  //     console.log('[Persons.js] componentWillUpdate ')
+  //   }
 
   componentDidUpdate() {
     console.log('[Persons.js] componentDidUpdate ')
   }
-  
-// Removed
-//   componentWillUpdate() {
-//     console.log('[Persons.js] componentWillUpdate ')
-//   }
+
+  componentWillUnmount() {
+    console.log('[Persons.js]  componentWillUnmount ')
+  }
 
   render() {
     console.log('[Persons.js] Rendering...')
