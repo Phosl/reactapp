@@ -7,11 +7,10 @@ const Cockpit = props => {
     // its runs all the time compontent it rendered 
     console.log('[Cockpit.js] useEffect')
     // http request...
-   const timer =  setTimeout(() => {
-      console.log('!!! - [Cockpit.js] saved data to cloud')
+    setTimeout(() => {
+      console.log('[Cockpit.js] saved data to cloud')
     }, 1000);
     return () => {
-        clearTimeout(timer)
         console.log('[Cockpit.js] cleanup work in useEffect')
 
     }
@@ -42,12 +41,15 @@ useEffect(() => {
     btnClass = classes.red
   }
 
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     assignedClasses.push(classes.red) // class = "red"
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedClasses.push(classes.bold) // class = ['red','bold']
   }
+  
+
+  
 
   return (
     <div className={classes.Cockpit}>
@@ -60,4 +62,5 @@ useEffect(() => {
   )
 }
 
-export default Cockpit
+export default React.memo(Cockpit);
+// in functional components React.memo check if element has some variation 
