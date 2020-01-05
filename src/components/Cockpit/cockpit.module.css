@@ -1,0 +1,34 @@
+.Cockpit .red {
+  color: red;
+}
+
+.Cockpit .bold {
+  font-weight: bold;
+}
+
+.Cockpit button {
+  border: 1px solid green;
+  padding: 16px;
+  color: white;
+  background-color: green;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.Cockpit button:hover {
+  background-color: lightgreen;
+  color: black;
+}
+
+.Cockpit button.red {
+  background-color: red;
+  color: black;
+}
+
+.Cockpit button.red:hover {
+  background-color: orange;
+}
+/*# sourceMappingURL=cockpit.module.css.map */
