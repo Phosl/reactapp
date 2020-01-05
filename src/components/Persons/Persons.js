@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Person from './Person/Person'
 
-class Persons extends Component {
+class Persons extends PureComponent {
   /*  we comment this becouse its initial state is undefined. */
   //   static getDerivedStateFromProps(props, state) {
   //     console.log('[Persons.js] getDerivedStateFromProps ')
@@ -14,26 +14,28 @@ class Persons extends Component {
 
 
 
-    // return true; fake check 
+// *** shouldComponentUpdate ***
+// return true; fake check 
 
 // looking at performance 
-// persons should be update / render ? 
+// persons should be updated / rendered ? 
 // we can do better for permormance 
 // check if the nextProps of persons is changed 
-// if change we need to render
+// if will change we'll need to render
 // else no
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate ')
-    if(nextProps.persons !== this.props.persons || 
-        nextProps.changed !== this.props.changed ||
-        nextProps.clicked !== this.props.clicked)
+//   shouldComponentUpdate(nextProps, nextState) {
+//     console.log('[Persons.js] shouldComponentUpdate ')
+//     if(nextProps.persons !== this.props.persons || 
+//         nextProps.changed !== this.props.changed ||
+//         nextProps.clicked !== this.props.clicked)
 
-        {
-        return true; 
-    } else {
-        return false;
-    }
-}
+//         {
+//         return true; 
+//     } else {
+//         return false;
+//     }
+// }
+// PureComponent its just a component with inside shouldComponentUpdate for all the props
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate ')
