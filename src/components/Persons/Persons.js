@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import Person from './Person/Person'
-
 class Persons extends PureComponent {
   /*  we comment this becouse its initial state is undefined. */
   //   static getDerivedStateFromProps(props, state) {
@@ -35,7 +34,7 @@ class Persons extends PureComponent {
 //         return false;
 //     }
 // }
-// PureComponent its just a component with inside shouldComponentUpdate for all the props
+// PureComponent its just a component with inside shouldComponentUpdate for all the props (any change)
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate ')
@@ -57,7 +56,7 @@ class Persons extends PureComponent {
   render() {
     console.log('[Persons.js] Rendering...')
 
-    return this.props.persons.map((person, index) => {
+    return (this.props.persons.map((person, index) => {
       return (
         <Person
           click={() => this.props.clicked(index)}
@@ -68,6 +67,7 @@ class Persons extends PureComponent {
         />
       )
     })
+    )
   }
 }
 export default Persons

@@ -1,15 +1,25 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef, useContext} from 'react'
 import classes from './cockpit.module.scss'
+import AuthContext from '../../context/auth-context';
+
 // useEffect Combime functionality of all hook in one.
 
 const Cockpit = props => {
+
+  const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext)
+
+  console.log(authContext.authenticated)
+// NON QUI  toggleBtnRef.current.click();
+
   useEffect(() => {
     // its runs all the time compontent it rendered 
     console.log('[Cockpit.js] useEffect')
+    toggleBtnRef.current.click();
     // http request...
-    setTimeout(() => {
-      console.log('[Cockpit.js] saved data to cloud')
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log('[Cockpit.js] saved data to cloud')
+    // }, 1000);
     return () => {
         console.log('[Cockpit.js] cleanup work in useEffect')
 
@@ -27,8 +37,11 @@ const Cockpit = props => {
 
 
 useEffect(() => {
+  // runs on every update
     console.log('[Cockpit.js] useEffect 2nd')
     return () => {
+      // you can also return something. Its runs BEFORE the main useEffect function runs, 
+      // but AFTER the (first) render cycle!
     console.log('[Cockpit.js] cleanup work in useEffect 2nd')
     }
 });
@@ -55,9 +68,14 @@ useEffect(() => {
     <div className={classes.Cockpit}>
       <h1>{props.titleApp}</h1>
       <p className={assignedClasses.join(' ')}> Hello </p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button className={btnClass} onClick={props.clicked} ref={toggleBtnRef}>
         Toggle Persons
       </button>
+      {/* <AuthContext.Consumer>
+       {context => <button onClick={context.login}>LogIn</button> }
+      </AuthContext.Consumer> */}
+      <button onClick={authContext.login}>LogIn</button> 
+
     </div>
   )
 }
